@@ -67,3 +67,5 @@ export interface DeviceService {
   stopProcess(): void;
   sendData(data: string): Promise<void>;
 }
+
+export type Language = 'en' | 'de' | 'es';

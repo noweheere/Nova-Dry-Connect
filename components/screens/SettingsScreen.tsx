@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { DEFAULT_SETTINGS } from '../../constants';
 import Card from '../common/Card';
 import Button from '../common/Button';
+import { useI18n } from '../../i18n';
 
 interface SettingsScreenProps {}
 
 const SettingsScreen: React.FC<SettingsScreenProps> = () => {
+  const { t } = useI18n();
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,15 +18,15 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-white">Settings</h1>
+      <h1 className="text-3xl font-bold text-white">{t('settings.title')}</h1>
 
       <Card>
-        <h2 className="text-xl font-bold text-white border-b border-gray-700 pb-3 mb-4">Default Parameters</h2>
-        <p className="text-sm text-gray-400 mb-6">These values are used as a baseline for new recipes, based on standard Harvest Right settings. Adjust them to fit your needs.</p>
+        <h2 className="text-xl font-bold text-white border-b border-gray-700 pb-3 mb-4">{t('settings.header')}</h2>
+        <p className="text-sm text-gray-400 mb-6">{t('settings.description')}</p>
         
         <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <label htmlFor="freezeTemp" className="font-medium text-gray-300">Default Freeze Temp (°C)</label>
+                <label htmlFor="freezeTemp" className="font-medium text-gray-300">{t('settings.freezeTemp')}</label>
                 <input
                     type="number"
                     id="freezeTemp"
@@ -35,7 +37,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
                 />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <label htmlFor="dryTemp" className="font-medium text-gray-300">Default Final Dry Temp (°C)</label>
+                <label htmlFor="dryTemp" className="font-medium text-gray-300">{t('settings.dryTemp')}</label>
                 <input
                     type="number"
                     id="dryTemp"
@@ -46,7 +48,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
                 />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <label htmlFor="mTorr" className="font-medium text-gray-300">Default Vacuum Pressure (mTorr)</label>
+                <label htmlFor="mTorr" className="font-medium text-gray-300">{t('settings.pressure')}</label>
                 <input
                     type="number"
                     id="mTorr"
@@ -57,7 +59,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
                 />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <label htmlFor="extraDryTime" className="font-medium text-gray-300">Default Extra Dry Time (minutes)</label>
+                <label htmlFor="extraDryTime" className="font-medium text-gray-300">{t('settings.extraDryTime')}</label>
                 <input
                     type="number"
                     id="extraDryTime"
@@ -70,8 +72,8 @@ const SettingsScreen: React.FC<SettingsScreenProps> = () => {
         </div>
 
         <div className="mt-8 pt-6 border-t border-gray-700 flex justify-end space-x-4">
-            <Button variant="secondary" onClick={() => setSettings(DEFAULT_SETTINGS)}>Reset to Defaults</Button>
-            <Button variant="primary">Save Settings</Button>
+            <Button variant="secondary" onClick={() => setSettings(DEFAULT_SETTINGS)}>{t('common.reset')}</Button>
+            <Button variant="primary">{t('common.save')}</Button>
         </div>
       </Card>
     </div>

@@ -12,8 +12,10 @@ import { AppScreen, Batch, DryerStatus, ProcessState, Recipe, ConnectionType, De
 import { mockDeviceService } from './services/webUsbService';
 import { webSerialService } from './services/webSerialService';
 import { DEFAULT_RECIPES } from './constants';
+import { useI18n } from './i18n';
 
 const App: React.FC = () => {
+  const { t } = useI18n();
   const [currentScreen, setCurrentScreen] = useState<AppScreen>('dashboard');
   const [recipes, setRecipes] = useState<Recipe[]>(DEFAULT_RECIPES);
   const [batches, setBatches] = useState<Batch[]>([]);
@@ -94,9 +96,9 @@ const App: React.FC = () => {
       deviceService.current?.startProcess(recipe);
       setCurrentScreen('dashboard');
     } else {
-        alert("Please connect to the dryer first or wait for the current process to finish.");
+        alert(t('app.connectFirstWarning'));
     }
-  }, [dryerStatus.isConnected, dryerStatus.processState]);
+  }, [dryerStatus.isConnected, dryerStatus.processState, t]);
 
   const handlePauseProcess = useCallback(() => deviceService.current?.pauseProcess(), []);
   const handleResumeProcess = useCallback(() => deviceService.current?.resumeProcess(), []);

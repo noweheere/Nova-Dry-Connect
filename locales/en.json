@@ -1,0 +1,118 @@
+
+{
+  "common": {
+    "edit": "Edit",
+    "start": "Start",
+    "pause": "Pause",
+    "resume": "Resume",
+    "stop": "Stop",
+    "save": "Save",
+    "reset": "Reset to Defaults",
+    "step": "Step",
+    "target": "Target"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "recipes": "Recipes",
+    "logbook": "Logbook",
+    "terminal": "Terminal",
+    "guide": "Guide",
+    "settings": "Settings"
+  },
+  "header": {
+    "title": "NovaDry Connect",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "connect": "Connect",
+    "disconnect": "Disconnect"
+  },
+  "connectionModal": {
+    "title": "Choose Connection Method",
+    "description": "Select how you want to connect to the NovaDry system.",
+    "serialTitle": "Connect via Serial (RS-232)",
+    "serialDescription": "Connect directly to your freeze dryer hardware using a USB-to-Serial adapter.",
+    "demoTitle": "Use Demo Mode",
+    "demoDescription": "Run a simulated process without any hardware. Ideal for testing and exploring the app."
+  },
+  "dashboard": {
+    "welcomeTitle": "Welcome to NovaDry Connect",
+    "welcomeSubtitle": "Your hub for precision freeze-drying.",
+    "connectMessage": "Please connect to your NovaLabs Freeze Dryer to begin.",
+    "lastBatchTitle": "Last Batch Summary",
+    "name": "Name",
+    "quantity": "Quantity",
+    "recipe": "Recipe",
+    "completedOn": "Completed On"
+  },
+  "processMonitor": {
+    "systemIdle": "System Idle",
+    "startFromRecipes": "Start a new batch from the Recipes screen.",
+    "temperature": "Temperature",
+    "pressure": "Pressure",
+    "elapsedTime": "Elapsed Time"
+  },
+  "recipes": {
+    "title": "Recipes",
+    "newRecipe": "New Recipe",
+    "disconnectedWarningTitle": "Device Disconnected",
+    "disconnectedWarningBody": "Please connect to the dryer to start a process.",
+    "startProcessTooltip": "Connect dryer to start"
+  },
+  "logbook": {
+    "title": "Batch Logbook",
+    "addManualEntry": "Add Manual Entry",
+    "noBatchesTitle": "No Batches Logged",
+    "noBatchesBody": "Completed processes will appear here.",
+    "ranOn": "Ran on",
+    "with": "with",
+    "quantity": "Quantity",
+    "sieves": "Sieves",
+    "washCycles": "Wash Cycles",
+    "trayType": "Tray Type",
+    "notes": "Notes",
+    "noNotes": "No notes for this batch."
+  },
+  "settings": {
+    "title": "Settings",
+    "header": "Default Parameters",
+    "description": "These values are used as a baseline for new recipes, based on standard Harvest Right settings. Adjust them to fit your needs.",
+    "freezeTemp": "Default Freeze Temp (°C)",
+    "dryTemp": "Default Final Dry Temp (°C)",
+    "pressure": "Default Vacuum Pressure (mTorr)",
+    "extraDryTime": "Default Extra Dry Time (minutes)"
+  },
+  "guide": {
+    "title": "Guides & Information",
+    "prep": {
+      "title": "Bubble Hash Preparation Guide",
+      "p1": "Proper preparation is key to a successful freeze-dry. Follow these steps for optimal results:",
+      "steps": [
+        "Collect & Sieve: After washing, collect your hash from the different micron bags. Gently press out excess water.",
+        "Microplane/Sieve: Freeze the collected hash patty solid. Once frozen, grate it into a fine powder using a microplane or push it through a stainless steel strainer. This dramatically increases surface area for even drying.",
+        "Pre-freeze Trays: Place parchment paper on your freeze dryer trays and put them in a standard freezer to get them cold before loading the hash.",
+        "Load Trays: Sprinkle the powdered hash evenly and thinly across the cold, parchment-lined trays. Avoid clumps and thick piles.",
+        "Load into Dryer: Immediately transfer the loaded trays into the NovaLabs Freeze Dryer and begin your selected cycle."
+      ]
+    },
+    "trays": {
+      "title": "Understanding Tray Types",
+      "p1": "The type of tray you use can influence the drying process. Here are some common types:",
+      "p2": "For bubble hash, <strong>Standard Stainless Steel</strong> trays lined with parchment paper are the most common and effective choice. They provide excellent thermal conductivity."
+    },
+    "timer": {
+      "title": "Timer & Reminder",
+      "p1": "Remember to set timers for your wash cycles to maintain consistency.",
+      "p2": "A dedicated timer feature will be added in a future update."
+    }
+  },
+  "terminal": {
+    "title": "Device Terminal",
+    "offlineTitle": "Terminal Offline",
+    "offlineBody": "Connect to a device to see live data.",
+    "welcome1": "Welcome to the NovaDry Terminal.",
+    "welcome2": "Raw device data will appear here when connected."
+  },
+  "app": {
+    "connectFirstWarning": "Please connect to the dryer first or wait for the current process to finish."
+  }
+}

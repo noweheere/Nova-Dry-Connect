@@ -1,0 +1,118 @@
+
+{
+  "common": {
+    "edit": "Bearbeiten",
+    "start": "Starten",
+    "pause": "Pause",
+    "resume": "Fortsetzen",
+    "stop": "Stopp",
+    "save": "Speichern",
+    "reset": "Auf Standard zurücksetzen",
+    "step": "Schritt",
+    "target": "Ziel"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "recipes": "Rezepte",
+    "logbook": "Logbuch",
+    "terminal": "Terminal",
+    "guide": "Anleitung",
+    "settings": "Einstellungen"
+  },
+  "header": {
+    "title": "NovaDry Connect",
+    "connected": "Verbunden",
+    "disconnected": "Getrennt",
+    "connect": "Verbinden",
+    "disconnect": "Trennen"
+  },
+  "connectionModal": {
+    "title": "Verbindungsmethode wählen",
+    "description": "Wählen Sie, wie Sie sich mit dem NovaDry-System verbinden möchten.",
+    "serialTitle": "Über Seriell (RS-232) verbinden",
+    "serialDescription": "Verbinden Sie sich direkt über einen USB-zu-Seriell-Adapter mit Ihrer Gefriertrockner-Hardware.",
+    "demoTitle": "Demo-Modus verwenden",
+    "demoDescription": "Führen Sie einen simulierten Prozess ohne Hardware durch. Ideal zum Testen und Erkunden der App."
+  },
+  "dashboard": {
+    "welcomeTitle": "Willkommen bei NovaDry Connect",
+    "welcomeSubtitle": "Ihr Zentrum für präzises Gefriertrocknen.",
+    "connectMessage": "Bitte verbinden Sie sich mit Ihrem NovaLabs Gefriertrockner, um zu beginnen.",
+    "lastBatchTitle": "Zusammenfassung der letzten Charge",
+    "name": "Name",
+    "quantity": "Menge",
+    "recipe": "Rezept",
+    "completedOn": "Abgeschlossen am"
+  },
+  "processMonitor": {
+    "systemIdle": "System im Leerlauf",
+    "startFromRecipes": "Starten Sie eine neue Charge vom Rezeptbildschirm.",
+    "temperature": "Temperatur",
+    "pressure": "Druck",
+    "elapsedTime": "Verstrichene Zeit"
+  },
+  "recipes": {
+    "title": "Rezepte",
+    "newRecipe": "Neues Rezept",
+    "disconnectedWarningTitle": "Gerät getrennt",
+    "disconnectedWarningBody": "Bitte verbinden Sie sich mit dem Trockner, um einen Prozess zu starten.",
+    "startProcessTooltip": "Trockner zum Starten verbinden"
+  },
+  "logbook": {
+    "title": "Chargen-Logbuch",
+    "addManualEntry": "Manuellen Eintrag hinzufügen",
+    "noBatchesTitle": "Keine Chargen protokolliert",
+    "noBatchesBody": "Abgeschlossene Prozesse werden hier angezeigt.",
+    "ranOn": "Lief am",
+    "with": "mit",
+    "quantity": "Menge",
+    "sieves": "Siebe",
+    "washCycles": "Waschzyklen",
+    "trayType": "Tablett-Typ",
+    "notes": "Notizen",
+    "noNotes": "Keine Notizen für diese Charge."
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "header": "Standardparameter",
+    "description": "Diese Werte werden als Basis für neue Rezepte verwendet, basierend auf Standardeinstellungen von Harvest Right. Passen Sie sie an Ihre Bedürfnisse an.",
+    "freezeTemp": "Standard-Gefriertemperatur (°C)",
+    "dryTemp": "Standard-Endtrocknungstemperatur (°C)",
+    "pressure": "Standard-Vakuumdruck (mTorr)",
+    "extraDryTime": "Standard-Zusatz-Trocknungszeit (Minuten)"
+  },
+  "guide": {
+    "title": "Anleitungen & Informationen",
+    "prep": {
+      "title": "Anleitung zur Bubble-Hash-Vorbereitung",
+      "p1": "Die richtige Vorbereitung ist der Schlüssel zu einem erfolgreichen Gefriertrocknen. Befolgen Sie diese Schritte für optimale Ergebnisse:",
+      "steps": [
+        "Sammeln & Sieben: Sammeln Sie nach dem Waschen Ihr Hasch aus den verschiedenen Mikron-Beuteln. Drücken Sie überschüssiges Wasser vorsichtig aus.",
+        "Microplane/Sieben: Frieren Sie den gesammelten Hasch-Patty fest ein. Sobald er gefroren ist, reiben Sie ihn mit einer Microplane zu einem feinen Pulver oder drücken Sie ihn durch ein Edelstahlsieb. Dies erhöht die Oberfläche für eine gleichmäßige Trocknung dramatisch.",
+        "Tabletts vorfrieren: Legen Sie Pergamentpapier auf Ihre Gefriertrockner-Tabletts und legen Sie sie in einen Standard-Gefrierschrank, um sie vor dem Beladen mit dem Hasch abzukühlen.",
+        "Tabletts beladen: Streuen Sie das pulverisierte Hasch gleichmäßig und dünn auf die kalten, mit Pergament ausgelegten Tabletts. Vermeiden Sie Klumpen und dicke Haufen.",
+        "In den Trockner laden: Übertragen Sie die beladenen Tabletts sofort in den NovaLabs Gefriertrockner und starten Sie den ausgewählten Zyklus."
+      ]
+    },
+    "trays": {
+      "title": "Tablett-Typen verstehen",
+      "p1": "Die Art des von Ihnen verwendeten Tabletts kann den Trocknungsprozess beeinflussen. Hier sind einige gängige Typen:",
+      "p2": "Für Bubble Hash sind <strong>Standard-Edelstahl</strong>-Tabletts mit Pergamentpapier die häufigste und effektivste Wahl. Sie bieten eine ausgezeichnete Wärmeleitfähigkeit."
+    },
+    "timer": {
+      "title": "Timer & Erinnerung",
+      "p1": "Denken Sie daran, Timer für Ihre Waschzyklen einzustellen, um die Konsistenz zu gewährleisten.",
+      "p2": "Eine dedizierte Timer-Funktion wird in einem zukünftigen Update hinzugefügt."
+    }
+  },
+  "terminal": {
+    "title": "Geräte-Terminal",
+    "offlineTitle": "Terminal Offline",
+    "offlineBody": "Verbinden Sie sich mit einem Gerät, um Live-Daten zu sehen.",
+    "welcome1": "Willkommen im NovaDry Terminal.",
+    "welcome2": "Rohdaten des Geräts werden hier angezeigt, wenn verbunden."
+  },
+  "app": {
+    "connectFirstWarning": "Bitte verbinden Sie sich zuerst mit dem Trockner oder warten Sie, bis der aktuelle Prozess abgeschlossen ist."
+  }
+}

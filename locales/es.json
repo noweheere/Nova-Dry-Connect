@@ -1,0 +1,118 @@
+
+{
+  "common": {
+    "edit": "Editar",
+    "start": "Iniciar",
+    "pause": "Pausar",
+    "resume": "Reanudar",
+    "stop": "Detener",
+    "save": "Guardar",
+    "reset": "Restablecer a valores predeterminados",
+    "step": "Paso",
+    "target": "Objetivo"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "recipes": "Recetas",
+    "logbook": "Bitácora",
+    "terminal": "Terminal",
+    "guide": "Guía",
+    "settings": "Ajustes"
+  },
+  "header": {
+    "title": "NovaDry Connect",
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
+    "connect": "Conectar",
+    "disconnect": "Desconectar"
+  },
+  "connectionModal": {
+    "title": "Elija el método de conexión",
+    "description": "Seleccione cómo desea conectarse al sistema NovaDry.",
+    "serialTitle": "Conectar vía Serial (RS-232)",
+    "serialDescription": "Conéctese directamente al hardware de su liofilizador mediante un adaptador de USB a Serial.",
+    "demoTitle": "Usar Modo Demo",
+    "demoDescription": "Ejecute un proceso simulado sin hardware. Ideal para probar y explorar la aplicación."
+  },
+  "dashboard": {
+    "welcomeTitle": "Bienvenido a NovaDry Connect",
+    "welcomeSubtitle": "Su centro para la liofilización de precisión.",
+    "connectMessage": "Por favor, conéctese a su liofilizador NovaLabs para comenzar.",
+    "lastBatchTitle": "Resumen del último lote",
+    "name": "Nombre",
+    "quantity": "Cantidad",
+    "recipe": "Receta",
+    "completedOn": "Completado el"
+  },
+  "processMonitor": {
+    "systemIdle": "Sistema inactivo",
+    "startFromRecipes": "Inicie un nuevo lote desde la pantalla de Recetas.",
+    "temperature": "Temperatura",
+    "pressure": "Presión",
+    "elapsedTime": "Tiempo transcurrido"
+  },
+  "recipes": {
+    "title": "Recetas",
+    "newRecipe": "Nueva Receta",
+    "disconnectedWarningTitle": "Dispositivo desconectado",
+    "disconnectedWarningBody": "Por favor, conéctese al secador para iniciar un proceso.",
+    "startProcessTooltip": "Conecte el secador para iniciar"
+  },
+  "logbook": {
+    "title": "Bitácora de Lotes",
+    "addManualEntry": "Añadir entrada manual",
+    "noBatchesTitle": "No hay lotes registrados",
+    "noBatchesBody": "Los procesos completados aparecerán aquí.",
+    "ranOn": "Ejecutado el",
+    "with": "con",
+    "quantity": "Cantidad",
+    "sieves": "Tamices",
+    "washCycles": "Ciclos de lavado",
+    "trayType": "Tipo de bandeja",
+    "notes": "Notas",
+    "noNotes": "No hay notas para este lote."
+  },
+  "settings": {
+    "title": "Ajustes",
+    "header": "Parámetros predeterminados",
+    "description": "Estos valores se utilizan como base para nuevas recetas, basados en la configuración estándar de Harvest Right. Ajústelos a sus necesidades.",
+    "freezeTemp": "Temp. de congelación predeterminada (°C)",
+    "dryTemp": "Temp. de secado final predeterminada (°C)",
+    "pressure": "Presión de vacío predeterminada (mTorr)",
+    "extraDryTime": "Tiempo de secado extra predeterminado (minutos)"
+  },
+  "guide": {
+    "title": "Guías e Información",
+    "prep": {
+      "title": "Guía de preparación de Bubble Hash",
+      "p1": "La preparación adecuada es clave para una liofilización exitosa. Siga estos pasos para obtener resultados óptimos:",
+      "steps": [
+        "Recolectar y tamizar: Después de lavar, recolecte su hachís de las diferentes bolsas de micras. Presione suavemente para eliminar el exceso de agua.",
+        "Microplane/Tamiz: Congele la pastilla de hachís recolectada hasta que esté sólida. Una vez congelada, rállela hasta obtener un polvo fino usando un microplane o pásela por un colador de acero inoxidable. Esto aumenta drásticamente la superficie para un secado uniforme.",
+        "Pre-congelar bandejas: Coloque papel pergamino en las bandejas de su liofilizador y póngalas en un congelador estándar para que se enfríen antes de cargar el hachís.",
+        "Cargar bandejas: Espolvoree el hachís en polvo de manera uniforme y delgada sobre las bandejas frías forradas con pergamino. Evite grumos y montones gruesos.",
+        "Cargar en el secador: Transfiera inmediatamente las bandejas cargadas al liofilizador NovaLabs y comience el ciclo seleccionado."
+      ]
+    },
+    "trays": {
+      "title": "Entendiendo los tipos de bandejas",
+      "p1": "El tipo de bandeja que utilice puede influir en el proceso de secado. Aquí hay algunos tipos comunes:",
+      "p2": "Para el bubble hash, las bandejas de <strong>acero inoxidable estándar</strong> forradas con papel pergamino son la opción más común y efectiva. Proporcionan una excelente conductividad térmica."
+    },
+    "timer": {
+      "title": "Temporizador y Recordatorio",
+      "p1": "Recuerde configurar temporizadores para sus ciclos de lavado para mantener la consistencia.",
+      "p2": "Se agregará una función de temporizador dedicada en una actualización futura."
+    }
+  },
+  "terminal": {
+    "title": "Terminal del Dispositivo",
+    "offlineTitle": "Terminal fuera de línea",
+    "offlineBody": "Conéctese a un dispositivo para ver datos en vivo.",
+    "welcome1": "Bienvenido a la Terminal de NovaDry.",
+    "welcome2": "Los datos brutos del dispositivo aparecerán aquí cuando esté conectado."
+  },
+  "app": {
+    "connectFirstWarning": "Por favor, conéctese primero al secador o espere a que finalice el proceso actual."
+  }
+}

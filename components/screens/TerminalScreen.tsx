@@ -1,9 +1,11 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { DeviceService, DryerStatus } from '../../types';
 import Card from '../common/Card';
 import Icon from '../common/Icon';
+import { useI18n } from '../../i18n';
 
 interface TerminalScreenProps {
   deviceService: DeviceService | null;
@@ -11,10 +13,12 @@ interface TerminalScreenProps {
 }
 
 const TerminalScreen: React.FC<TerminalScreenProps> = ({ deviceService, dryerStatus }) => {
+  const { t } = useI18n();
   const terminalRef = useRef<HTMLDivElement>(null);
   const term = useRef<Terminal | null>(null);
   const fitAddon = useRef<FitAddon | null>(null);
 
+  // Effect to initialize and manage the terminal instance
   useEffect(() => {
     if (terminalRef.current && !term.current) {
       const xterm = new Terminal({
@@ -35,10 +39,6 @@ const TerminalScreen: React.FC<TerminalScreenProps> = ({ deviceService, dryerSta
       xterm.open(terminalRef.current);
       fitAddon.current.fit();
       
-      xterm.writeln('Welcome to the NovaDry Terminal.');
-      xterm.writeln('Raw device data will appear here when connected.');
-      xterm.writeln('');
-
       term.current = xterm;
       
       // Handle data from terminal input
@@ -54,13 +54,28 @@ const TerminalScreen: React.FC<TerminalScreenProps> = ({ deviceService, dryerSta
 
     return () => {
       window.removeEventListener('resize', onResize);
-      // Don't dispose terminal on unmount to preserve history
     };
-  }, [deviceService]);
-  
+  }, [deviceService]); // Only run on first mount and if service changes
+
+  // Effect to update welcome message on language change
+  useEffect(() => {
+    if (term.current) {
+      term.current.clear();
+      term.current.writeln(`\x1b[1;34m${t('terminal.welcome1')}\x1b[0m`);
+      term.current.writeln(t('terminal.welcome2'));
+      term.current.writeln('');
+    }
+  }, [t]);
+
   // Effect for handling incoming data from the service
   useEffect(() => {
     if (!deviceService || !term.current) return;
+    
+    // Clear terminal on new connection
+    term.current.clear();
+    term.current.writeln(`\x1b[1;34m${t('terminal.welcome1')}\x1b[0m`);
+    term.current.writeln(t('terminal.welcome2'));
+    term.current.writeln('');
     
     const dataHandler = (data: string) => {
         term.current?.write(data);
@@ -71,16 +86,16 @@ const TerminalScreen: React.FC<TerminalScreenProps> = ({ deviceService, dryerSta
     return () => {
         // Cleanup: Ideally the service would have an `offData` method
     };
-  }, [deviceService]);
+  }, [deviceService, t]);
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-white">Device Terminal</h1>
+      <h1 className="text-3xl font-bold text-white">{t('terminal.title')}</h1>
       {!dryerStatus.isConnected && (
          <Card className="text-center text-gray-400">
             <Icon path="M6.4 13.4L5 12l1.4-1.4M8.6 10.6L10 12l-1.4 1.4m.2-6.8H18M4.5 3.75v16.5h15V3.75h-15z" className="mx-auto h-12 w-12 text-gray-500" />
-            <h3 className="mt-2 text-lg font-medium text-white">Terminal Offline</h3>
-            <p className="mt-1 text-sm">Connect to a device to see live data.</p>
+            <h3 className="mt-2 text-lg font-medium text-white">{t('terminal.offlineTitle')}</h3>
+            <p className="mt-1 text-sm">{t('terminal.offlineBody')}</p>
         </Card>
       )}
       <Card className="!p-0 overflow-hidden">

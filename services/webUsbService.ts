@@ -1,4 +1,3 @@
-
 import { DryerStatus, ProcessState, Recipe, DeviceService } from '../types';
 
 type StatusCallback = (status: DryerStatus) => void;
@@ -33,7 +32,8 @@ class MockDeviceService implements DeviceService {
   connect(): Promise<void> {
     return new Promise((resolve) => {
       console.log("Starting Mock/Demo connection...");
-      setTimeout(() => {
+      // Fix: Use window.setTimeout to be explicit about using the browser API.
+      window.setTimeout(() => {
         this.status.isConnected = true;
         this.notifyStatus();
         console.log("Demo connection established.");
@@ -64,9 +64,11 @@ class MockDeviceService implements DeviceService {
     this.stepStartTime = 0;
     this.totalDuration = recipe.steps.reduce((sum, step) => sum + step.duration * 60, 0);
 
-    if (this.intervalId) clearInterval(this.intervalId);
+    // Fix: Use window.clearInterval to match window.setInterval.
+    if (this.intervalId) window.clearInterval(this.intervalId);
 
-    this.intervalId = setInterval(() => {
+    // Fix: Use window.setInterval to avoid type conflict with Node.js's setInterval which returns a Timeout object instead of a number.
+    this.intervalId = window.setInterval(() => {
       this.updateSimulation();
     }, 1000);
   }
@@ -76,7 +78,8 @@ class MockDeviceService implements DeviceService {
       this.status.processState = ProcessState.PAUSED;
       console.log("Mock process paused.");
       if (this.intervalId) {
-        clearInterval(this.intervalId);
+        // Fix: Use window.clearInterval to match window.setInterval.
+        window.clearInterval(this.intervalId);
         this.intervalId = null;
       }
       this.notifyStatus();
@@ -87,7 +90,8 @@ class MockDeviceService implements DeviceService {
     if (this.status.processState === ProcessState.PAUSED) {
       this.status.processState = ProcessState.RUNNING;
       console.log("Mock process resumed.");
-      this.intervalId = setInterval(() => {
+      // Fix: Use window.setInterval to avoid type conflict with Node.js's setInterval.
+      this.intervalId = window.setInterval(() => {
         this.updateSimulation();
       }, 1000);
     }
@@ -95,7 +99,8 @@ class MockDeviceService implements DeviceService {
   
   stopProcess(): void {
     if (this.intervalId) {
-      clearInterval(this.intervalId);
+      // Fix: Use window.clearInterval to match window.setInterval.
+      window.clearInterval(this.intervalId);
       this.intervalId = null;
     }
     this.status.processState = ProcessState.IDLE;
@@ -133,12 +138,14 @@ class MockDeviceService implements DeviceService {
   }
 
   private finishProcess(): void {
-    if (this.intervalId) clearInterval(this.intervalId);
+    // Fix: Use window.clearInterval to match window.setInterval.
+    if (this.intervalId) window.clearInterval(this.intervalId);
     this.intervalId = null;
     this.status.processState = ProcessState.FINISHED;
     console.log("Mock process finished.");
     this.notifyStatus();
-    setTimeout(() => {
+    // Fix: Use window.setTimeout to be explicit about using the browser API.
+    window.setTimeout(() => {
         if(this.status.processState === ProcessState.FINISHED) {
             this.stopProcess();
         }

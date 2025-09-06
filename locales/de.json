@@ -17,6 +17,7 @@
     "logbook": "Logbuch",
     "terminal": "Terminal",
     "guide": "Anleitung",
+    "hardware": "Hardware",
     "settings": "Einstellungen"
   },
   "header": {
@@ -103,6 +104,62 @@
       "title": "Timer & Erinnerung",
       "p1": "Denken Sie daran, Timer für Ihre Waschzyklen einzustellen, um die Konsistenz zu gewährleisten.",
       "p2": "Eine dedizierte Timer-Funktion wird in einem zukünftigen Update hinzugefügt."
+    }
+  },
+  "hardware": {
+    "title": "Hardware-Integrationsanleitung",
+    "intro": {
+      "title": "Verfügbare Ports auflisten",
+      "p1": "Die Web Serial API ermöglicht es Webanwendungen, mit seriellen Geräten zu kommunizieren. Vor dem Verbinden können Sie eine Liste der Ports abrufen, für die der Benutzer zuvor den Zugriff gewährt hat.",
+      "p2": "Das folgende Code-Beispiel zeigt, wie man Informationen über bereits genehmigte serielle Ports abruft und anzeigt.",
+      "code": "async function listGrantedPorts() {\n  if ('serial' in navigator) {\n    const ports = await navigator.serial.getPorts();\n    console.log(`Gefunden: ${ports.length} genehmigte Ports.`);\n    for (const port of ports) {\n      const info = port.getInfo();\n      console.log('Port-Info:', info);\n      // info enthält usbVendorId und usbProductId\n    }\n  } else {\n    console.error('Web Serial API nicht unterstützt.');\n  }\n}\nlistGrantedPorts();"
+    },
+    "detection": {
+      "title": "Automatische Geräteerkennung (VID/PID)",
+      "p1": "Der zuverlässigste Weg, ein bestimmtes Gerät zu identifizieren, ist über seine USB Vendor ID (VID) und Product ID (PID). Sie können den Benutzer bitten, ein Gerät auszuwählen, das einem bestimmten VID/PID-Paar entspricht.",
+      "p2": "Dies ist die primäre Methode, um zwischen verschiedenen Arten von seriellen Adaptern zu unterscheiden.",
+      "code": "async function requestPortWithFilters(filters) {\n  try {\n    // Benutzer auffordern, einen Port auszuwählen, der den Filtern entspricht.\n    const port = await navigator.serial.requestPort({ filters });\n    const info = port.getInfo();\n    console.log(`Vendor ID: ${info.usbVendorId}, Product ID: ${info.usbProductId}`);\n    return port;\n  } catch (error) {\n    console.error('Kein Port ausgewählt oder Fehler:', error);\n  }\n}\n\n// Beispiel: const filters = [{ usbVendorId: 0x1234, usbProductId: 0x5678 }];\n// requestPortWithFilters(filters);"
+    },
+    "ftdi": {
+      "title": "FTDI-Adapter",
+      "p1": "FTDI (Future Technology Devices International) ist ein sehr verbreiteter Hersteller von USB-zu-Seriell-Konverterchips. Ihre offizielle Vendor ID ist 0x0403.",
+      "codeTitle": "Nach FTDI-Geräten suchen",
+      "code": "const ftdiFilters = [{ usbVendorId: 0x0403 }];\n\nasync function connectToFTDI() {\n  const port = await navigator.serial.requestPort({ filters: ftdiFilters });\n  if (!port) return;\n\n  await port.open({ baudRate: 9600 });\n  console.log('Verbunden mit FTDI-Gerät!');\n  \n  // Beispiel: Daten schreiben\n  const writer = port.writable.getWriter();\n  const data = new Uint8Array([0x48, 0x61, 0x6c, 0x6c, 0x6f]); // 'Hallo'\n  await writer.write(data);\n  writer.releaseLock();\n}\n\nconnectToFTDI();"
+    },
+    "generic": {
+      "title": "Generische Adapter (CH340/CP210x)",
+      "p1": "Viele preisgünstige Mikrocontroller und Adapter verwenden Chips wie den WCH CH340 oder Silicon Labs CP210x. Sie haben ihre eigenen eindeutigen Vendor IDs.",
+      "listTitle": "Häufige VIDs:",
+      "vid1": "CH340/CH341: 0x1A86",
+      "vid2": "CP210x: 0x10C4",
+      "codeTitle": "Nach generischen Adaptern suchen",
+      "code": "const genericFilters = [\n  { usbVendorId: 0x1A86 }, // CH340\n  { usbVendorId: 0x10C4 }, // CP210x\n];\n\nasync function connectToGeneric() {\n  const port = await navigator.serial.requestPort({ filters: genericFilters });\n  if (!port) return;\n  // ... Verbindungslogik ähnlich wie bei FTDI ...\n  console.log('Verbunden mit einem generischen seriellen Adapter!');\n}\n\nconnectToGeneric();"
+    },
+    "stlink": {
+      "title": "ST-Link Debugger",
+      "p1": "ST-Link-Programmierer, die für STM32-Mikrocontroller verwendet werden, enthalten oft einen virtuellen COM-Port (VCP) für die serielle Kommunikation. Die Vendor ID für STMicroelectronics ist 0x0483.",
+      "listTitle": "Häufige PIDs:",
+      "pid1": "ST-Link/V2: 0x3748",
+      "pid2": "ST-Link/V2.1: 0x374B",
+      "pid3": "ST-LINK-V3: 0x374F, 0x3752",
+      "codeTitle": "Nach ST-Link VCP suchen",
+      "code": "const stlinkFilters = [\n  { usbVendorId: 0x0483, usbProductId: 0x3748 },\n  { usbVendorId: 0x0483, usbProductId: 0x374B },\n  { usbVendorId: 0x0483, usbProductId: 0x374F },\n  { usbVendorId: 0x0483, usbProductId: 0x3752 },\n];\n\nasync function connectToSTLink() {\n  const port = await navigator.serial.requestPort({ filters: stlinkFilters });\n  if (!port) return;\n  console.log('Verbunden mit ST-Link Virtual COM Port!');\n}\n\nconnectToSTLink();"
+    },
+    "buspirate": {
+      "title": "Bus Pirate",
+      "p1": "Der Bus Pirate ist ein vielseitiges Hardware-Debugging-Tool, das über eine serielle Konsole kommuniziert. Er hat eine spezifische VID/PID und eine textbasierte Befehlsschnittstelle.",
+      "listTitle": "VID/PID:",
+      "vidpid": "VID: 0x04D8, PID: 0xFB00 (v3/v4)",
+      "codeTitle": "Mit Bus Pirate kommunizieren",
+      "code": "const busPirateFilter = [{ usbVendorId: 0x04D8, usbProductId: 0xFB00 }];\n\nasync function talkToBusPirate() {\n  const port = await navigator.serial.requestPort({ filters: busPirateFilter });\n  if (!port) return;\n  await port.open({ baudRate: 115200 });\n\n  const writer = port.writable.getWriter();\n  const reader = port.readable.getReader();\n  const encoder = new TextEncoder();\n  const decoder = new TextDecoder();\n\n  // In den Raw-Bitbang-Modus wechseln\n  await writer.write(encoder.encode('\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n')); // 10 Newlines zum Zurücksetzen senden\n  await new Promise(r => setTimeout(r, 50)); // Auf Reset warten\n\n  // 'i' für Info senden\n  await writer.write(encoder.encode('i\\n'));\n\n  // Antwort lesen\n  const { value } = await reader.read();\n  console.log(decoder.decode(value));\n\n  writer.releaseLock();\n  reader.releaseLock();\n}\n\ntalkToBusPirate();"
+    },
+    "flipper": {
+      "title": "Flipper Zero",
+      "p1": "Der Flipper Zero bietet eine Befehlszeilenschnittstelle (CLI) über seinen seriellen USB-Port, die eine programmatische Steuerung und Informationsabfrage ermöglicht.",
+      "listTitle": "VID/PID:",
+      "vidpid": "VID: 0x0483, PID: 0x5740",
+      "codeTitle": "Flipper Zero Geräteinfo abrufen",
+      "code": "const flipperFilter = [{ usbVendorId: 0x0483, usbProductId: 0x5740 }];\n\nasync function getFlipperInfo() {\n  const port = await navigator.serial.requestPort({ filters: flipperFilter });\n  if (!port) return;\n  await port.open({ baudRate: 115200 });\n\n  const writer = port.writable.getWriter();\n  const reader = port.readable.getReader();\n  const encoder = new TextEncoder();\n  const decoder = new TextDecoder();\n\n  // 'device_info'-Befehl mit Wagenrücklauf senden\n  await writer.write(encoder.encode('device_info\\r'));\n  \n  // Antwort lesen, bis der Prompt '>' erscheint\n  let response = '';\n  while (!response.includes('>')) {\n    const { value, done } = await reader.read();\n    if (done) break;\n    response += decoder.decode(value, { stream: true });\n  }\n  console.log(response);\n  \n  writer.releaseLock();\n  reader.releaseLock();\n}\n\ngetFlipperInfo();"
     }
   },
   "terminal": {

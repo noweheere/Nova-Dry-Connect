@@ -7,6 +7,7 @@ import LogbookScreen from './components/screens/LogbookScreen';
 import SettingsScreen from './components/screens/SettingsScreen';
 import GuideScreen from './components/screens/GuideScreen';
 import TerminalScreen from './components/screens/TerminalScreen';
+import HardwareScreen from './components/screens/HardwareScreen';
 import ConnectionModal from './components/ConnectionModal';
 import { AppScreen, Batch, DryerStatus, ProcessState, Recipe, ConnectionType, DeviceService } from './types';
 import { mockDeviceService } from './services/webUsbService';
@@ -118,6 +119,8 @@ const App: React.FC = () => {
         return <SettingsScreen />;
       case 'guide':
         return <GuideScreen />;
+      case 'hardware':
+        return <HardwareScreen />;
       default:
         return <DashboardScreen dryerStatus={dryerStatus} lastBatch={batches[0] || null} onPause={handlePauseProcess} onResume={handleResumeProcess} onStop={handleStopProcess} />;
     }

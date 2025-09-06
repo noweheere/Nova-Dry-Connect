@@ -1,4 +1,3 @@
-
 import { DryerStatus, ProcessState, Recipe, DeviceService } from '../types';
 
 // Fix: Add minimal type definition for SerialPort to satisfy TypeScript and resolve "Cannot find name 'SerialPort'".
@@ -53,7 +52,11 @@ class WebSerialService implements DeviceService {
       throw new Error("Web Serial API not supported.");
     }
     try {
-      // Fix: Cast navigator to 'any' to access the Web Serial API and resolve "Property 'requestPort' does not exist on type 'unknown'".
+      // The Permissions API does not support querying for 'serial' permission, which
+      // was causing an error. The correct approach is to simply call requestPort()
+      // and handle any errors (e.g., user cancellation, policy denial) in the catch block.
+      
+      // Cast navigator to 'any' to access the Web Serial API.
       this.port = await (navigator as any).serial.requestPort();
       await this.port.open({ baudRate: 115200 }); // Common baud rate, adjust if needed
 
@@ -68,7 +71,10 @@ class WebSerialService implements DeviceService {
     } catch (error) {
       console.error("Error connecting to serial port:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
-      this.dataCallback?.(`\r\n--- Connection Failed: ${errorMessage} ---\r\n`);
+      // Don't show an error if the user simply cancelled the port selection dialog.
+      if (!errorMessage.includes("No port selected")) {
+         this.dataCallback?.(`\r\n--- Connection Failed: ${errorMessage} ---\r\n`);
+      }
     }
   }
 

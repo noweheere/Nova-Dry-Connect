@@ -52,7 +52,7 @@ export interface DryerStatus {
   activeRecipe: Recipe | null;
 }
 
-export type AppScreen = 'dashboard' | 'recipes' | 'logbook' | 'settings' | 'guide' | 'terminal';
+export type AppScreen = 'dashboard' | 'recipes' | 'logbook' | 'settings' | 'guide' | 'terminal' | 'hardware';
 
 export type ConnectionType = 'mock' | 'serial';
 

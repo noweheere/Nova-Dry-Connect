@@ -108,11 +108,44 @@
   },
   "hardware": {
     "title": "Guía de Integración de Hardware",
+    "common": {
+      "wiringTitle": "Cómo Conectar",
+      "wiringDiagram": "Adaptador FTDI      Microcontrolador\n+-----------+       +-----------+\n|      GND  |-------|  GND      |\n|      RXD  |-------|  TXD      |\n|      TXD  |-------|  RXD      |\n|      5V   |       |           |\n+-----------+       +-----------+",
+      "driversTitle": "Descargas de Controladores",
+      "testButton": "Probar Conexión",
+      "deviceFound": "¡Dispositivo encontrado y permiso concedido!",
+      "apiNotSupported": "La API Web Serial no es compatible con este navegador.",
+      "error": "Error",
+      "copied": "¡Copiado al portapapeles!",
+      "copyCommand": "Copiar Comando"
+    },
     "intro": {
       "title": "Listar Puertos Disponibles",
       "p1": "La API Web Serial permite que las aplicaciones web se comuniquen con dispositivos seriales. Antes de conectarse, puede obtener una lista de los puertos a los que el usuario ha otorgado acceso previamente.",
       "p2": "El siguiente fragmento de código demuestra cómo recuperar y mostrar información sobre los puertos seriales ya permitidos.",
       "code": "async function listGrantedPorts() {\n  if ('serial' in navigator) {\n    const ports = await navigator.serial.getPorts();\n    console.log(`Se encontraron ${ports.length} puertos permitidos.`);\n    for (const port of ports) {\n      const info = port.getInfo();\n      console.log('Info del puerto:', info);\n      // info contiene usbVendorId y usbProductId\n    }\n  } else {\n    console.error('La API Web Serial no es compatible.');\n  }\n}\nlistGrantedPorts();"
+    },
+    "troubleshooting": {
+      "title": "Solución de Problemas",
+      "p1": "Si tiene problemas para conectarse a un dispositivo, aquí hay algunos pasos para diagnosticar el problema.",
+      "deviceManager": {
+        "title": "Usando el Administrador de Dispositivos de Windows",
+        "steps": [
+          "Presione <strong>Win + R</strong> para abrir el diálogo Ejecutar.",
+          "Escriba <strong>devmgmt.msc</strong> y presione Enter.",
+          "Expanda la sección 'Puertos (COM & LPT)'.",
+          "Busque su dispositivo. Si tiene un signo de exclamación amarillo, hay un problema con el controlador. Haga clic derecho sobre él y seleccione 'Actualizar controlador'."
+        ]
+      },
+      "general": {
+        "title": "Comprobaciones Generales",
+        "steps": [
+          "Asegúrese de que el cable USB esté bien conectado tanto al dispositivo como al ordenador.",
+          "Pruebe un puerto USB y un cable diferentes si es posible.",
+          "Verifique que ha instalado los controladores correctos para su sistema operativo.",
+          "Cierre cualquier otro software que pueda estar utilizando el puerto COM (por ejemplo, Arduino IDE, otros programas de terminal)."
+        ]
+      }
     },
     "detection": {
       "title": "Detección Automática de Dispositivos (VID/PID)",
@@ -138,6 +171,7 @@
     "stlink": {
       "title": "Depuradores ST-Link",
       "p1": "Los programadores ST-Link, utilizados para microcontroladores STM32, a menudo incluyen un Puerto COM Virtual (VCP) para la comunicación serial. El ID de Vendedor para STMicroelectronics es 0x0483.",
+      "driverInfo": "Los controladores se incluyen normalmente con STM32CubeProgrammer o el paquete de controladores ST-LINK.",
       "listTitle": "PIDs Comunes:",
       "pid1": "ST-Link/V2: 0x3748",
       "pid2": "ST-Link/V2.1: 0x374B",
@@ -148,6 +182,7 @@
     "buspirate": {
       "title": "Bus Pirate",
       "p1": "El Bus Pirate es una herramienta versátil de depuración de hardware que se comunica a través de una consola serial. Tiene un VID/PID específico y una interfaz de comandos basada en texto.",
+      "driverInfo": "El Bus Pirate utiliza un chip FTDI, por lo que se requieren los controladores VCP de FTDI.",
       "listTitle": "VID/PID:",
       "vidpid": "VID: 0x04D8, PID: 0xFB00 (v3/v4)",
       "codeTitle": "Comunicarse con Bus Pirate",
@@ -156,6 +191,7 @@
     "flipper": {
       "title": "Flipper Zero",
       "p1": "El Flipper Zero proporciona una interfaz de línea de comandos (CLI) a través de su puerto serial USB, permitiendo el control programático y la recuperación de información.",
+      "driverInfo": "Los controladores se instalan normalmente de forma automática con la aplicación qFlipper.",
       "listTitle": "VID/PID:",
       "vidpid": "VID: 0x0483, PID: 0x5740",
       "codeTitle": "Obtener Información del Dispositivo Flipper Zero",

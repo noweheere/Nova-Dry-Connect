@@ -108,11 +108,44 @@
   },
   "hardware": {
     "title": "Hardware Integration Guide",
+    "common": {
+      "wiringTitle": "How to Connect",
+      "wiringDiagram": "FTDI Adapter        Microcontroller\n+-----------+       +-----------+\n|      GND  |-------|  GND      |\n|      RXD  |-------|  TXD      |\n|      TXD  |-------|  RXD      |\n|      5V   |       |           |\n+-----------+       +-----------+",
+      "driversTitle": "Driver Downloads",
+      "testButton": "Test Connection",
+      "deviceFound": "Device found and permission granted!",
+      "apiNotSupported": "Web Serial API is not supported in this browser.",
+      "error": "Error",
+      "copied": "Copied to clipboard!",
+      "copyCommand": "Copy Command"
+    },
     "intro": {
       "title": "Listing Available Ports",
       "p1": "The Web Serial API allows web applications to communicate with serial devices. Before connecting, you can get a list of ports the user has previously granted access to.",
       "p2": "The following code snippet demonstrates how to retrieve and display information about already permitted serial ports.",
       "code": "async function listGrantedPorts() {\n  if ('serial' in navigator) {\n    const ports = await navigator.serial.getPorts();\n    console.log(`Found ${ports.length} permitted ports.`);\n    for (const port of ports) {\n      const info = port.getInfo();\n      console.log('Port Info:', info);\n      // info contains usbVendorId and usbProductId\n    }\n  } else {\n    console.error('Web Serial API not supported.');\n  }\n}\nlistGrantedPorts();"
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "p1": "If you're having trouble connecting to a device, here are some steps to diagnose the issue.",
+      "deviceManager": {
+        "title": "Using Windows Device Manager",
+        "steps": [
+          "Press <strong>Win + R</strong> to open the Run dialog.",
+          "Type <strong>devmgmt.msc</strong> and press Enter.",
+          "Expand the 'Ports (COM & LPT)' section.",
+          "Check for your device. If it has a yellow exclamation mark, there's a driver issue. Right-click it and select 'Update driver'."
+        ]
+      },
+      "general": {
+        "title": "General Checks",
+        "steps": [
+          "Ensure the USB cable is securely connected to both the device and the computer.",
+          "Try a different USB port and cable if possible.",
+          "Verify you have installed the correct drivers for your operating system.",
+          "Close any other software that might be using the COM port (e.g., Arduino IDE, other terminal programs)."
+        ]
+      }
     },
     "detection": {
       "title": "Automatic Device Detection (VID/PID)",
@@ -138,6 +171,7 @@
     "stlink": {
       "title": "ST-Link Debuggers",
       "p1": "ST-Link programmers, used for STM32 microcontrollers, often include a Virtual COM Port (VCP) for serial communication. The Vendor ID for STMicroelectronics is 0x0483.",
+      "driverInfo": "Drivers are typically included with the STM32CubeProgrammer or ST-LINK driver package.",
       "listTitle": "Common PIDs:",
       "pid1": "ST-Link/V2: 0x3748",
       "pid2": "ST-Link/V2.1: 0x374B",
@@ -148,6 +182,7 @@
     "buspirate": {
       "title": "Bus Pirate",
       "p1": "The Bus Pirate is a versatile hardware debugging tool that communicates over a serial console. It has a specific VID/PID and a text-based command interface.",
+      "driverInfo": "The Bus Pirate uses an FTDI chip, so the FTDI VCP drivers are required.",
       "listTitle": "VID/PID:",
       "vidpid": "VID: 0x04D8, PID: 0xFB00 (v3/v4)",
       "codeTitle": "Communicate with Bus Pirate",
@@ -156,6 +191,7 @@
     "flipper": {
       "title": "Flipper Zero",
       "p1": "The Flipper Zero provides a command-line interface (CLI) over its USB serial port, allowing for programmatic control and information retrieval.",
+      "driverInfo": "Drivers are typically installed automatically by the qFlipper application.",
       "listTitle": "VID/PID:",
       "vidpid": "VID: 0x0483, PID: 0x5740",
       "codeTitle": "Get Flipper Zero Device Info",

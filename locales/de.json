@@ -108,11 +108,44 @@
   },
   "hardware": {
     "title": "Hardware-Integrationsanleitung",
+    "common": {
+      "wiringTitle": "Anschlussanleitung",
+      "wiringDiagram": "FTDI Adapter        Mikrocontroller\n+-----------+       +-----------+\n|      GND  |-------|  GND      |\n|      RXD  |-------|  TXD      |\n|      TXD  |-------|  RXD      |\n|      5V   |       |           |\n+-----------+       +-----------+",
+      "driversTitle": "Treiber-Downloads",
+      "testButton": "Verbindung testen",
+      "deviceFound": "Gerät gefunden und Berechtigung erteilt!",
+      "apiNotSupported": "Die Web Serial API wird von diesem Browser nicht unterstützt.",
+      "error": "Fehler",
+      "copied": "In die Zwischenablage kopiert!",
+      "copyCommand": "Befehl kopieren"
+    },
     "intro": {
       "title": "Verfügbare Ports auflisten",
       "p1": "Die Web Serial API ermöglicht es Webanwendungen, mit seriellen Geräten zu kommunizieren. Vor dem Verbinden können Sie eine Liste der Ports abrufen, für die der Benutzer zuvor den Zugriff gewährt hat.",
       "p2": "Das folgende Code-Beispiel zeigt, wie man Informationen über bereits genehmigte serielle Ports abruft und anzeigt.",
       "code": "async function listGrantedPorts() {\n  if ('serial' in navigator) {\n    const ports = await navigator.serial.getPorts();\n    console.log(`Gefunden: ${ports.length} genehmigte Ports.`);\n    for (const port of ports) {\n      const info = port.getInfo();\n      console.log('Port-Info:', info);\n      // info enthält usbVendorId und usbProductId\n    }\n  } else {\n    console.error('Web Serial API nicht unterstützt.');\n  }\n}\nlistGrantedPorts();"
+    },
+    "troubleshooting": {
+      "title": "Fehlerbehebung",
+      "p1": "Wenn Sie Probleme haben, eine Verbindung zu einem Gerät herzustellen, finden Sie hier einige Schritte zur Diagnose des Problems.",
+      "deviceManager": {
+        "title": "Windows Geräte-Manager verwenden",
+        "steps": [
+          "Drücken Sie <strong>Win + R</strong>, um den Ausführen-Dialog zu öffnen.",
+          "Geben Sie <strong>devmgmt.msc</strong> ein und drücken Sie Enter.",
+          "Erweitern Sie den Abschnitt 'Anschlüsse (COM & LPT)'.",
+          "Suchen Sie nach Ihrem Gerät. Wenn es ein gelbes Ausrufezeichen hat, liegt ein Treiberproblem vor. Klicken Sie mit der rechten Maustaste darauf und wählen Sie 'Treiber aktualisieren'."
+        ]
+      },
+      "general": {
+        "title": "Allgemeine Prüfungen",
+        "steps": [
+          "Stellen Sie sicher, dass das USB-Kabel sowohl am Gerät als auch am Computer fest angeschlossen ist.",
+          "Versuchen Sie nach Möglichkeit einen anderen USB-Anschluss und ein anderes Kabel.",
+          "Überprüfen Sie, ob Sie die richtigen Treiber für Ihr Betriebssystem installiert haben.",
+          "Schließen Sie andere Software, die möglicherweise den COM-Port verwendet (z. B. Arduino IDE, andere Terminalprogramme)."
+        ]
+      }
     },
     "detection": {
       "title": "Automatische Geräteerkennung (VID/PID)",
@@ -138,6 +171,7 @@
     "stlink": {
       "title": "ST-Link Debugger",
       "p1": "ST-Link-Programmierer, die für STM32-Mikrocontroller verwendet werden, enthalten oft einen virtuellen COM-Port (VCP) für die serielle Kommunikation. Die Vendor ID für STMicroelectronics ist 0x0483.",
+      "driverInfo": "Treiber sind normalerweise im STM32CubeProgrammer oder im ST-LINK-Treiberpaket enthalten.",
       "listTitle": "Häufige PIDs:",
       "pid1": "ST-Link/V2: 0x3748",
       "pid2": "ST-Link/V2.1: 0x374B",
@@ -148,6 +182,7 @@
     "buspirate": {
       "title": "Bus Pirate",
       "p1": "Der Bus Pirate ist ein vielseitiges Hardware-Debugging-Tool, das über eine serielle Konsole kommuniziert. Er hat eine spezifische VID/PID und eine textbasierte Befehlsschnittstelle.",
+      "driverInfo": "Der Bus Pirate verwendet einen FTDI-Chip, daher werden die FTDI VCP-Treiber benötigt.",
       "listTitle": "VID/PID:",
       "vidpid": "VID: 0x04D8, PID: 0xFB00 (v3/v4)",
       "codeTitle": "Mit Bus Pirate kommunizieren",
@@ -156,6 +191,7 @@
     "flipper": {
       "title": "Flipper Zero",
       "p1": "Der Flipper Zero bietet eine Befehlszeilenschnittstelle (CLI) über seinen seriellen USB-Port, die eine programmatische Steuerung und Informationsabfrage ermöglicht.",
+      "driverInfo": "Treiber werden normalerweise automatisch von der qFlipper-Anwendung installiert.",
       "listTitle": "VID/PID:",
       "vidpid": "VID: 0x0483, PID: 0x5740",
       "codeTitle": "Flipper Zero Geräteinfo abrufen",

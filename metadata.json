@@ -1,0 +1,5 @@
+{
+  "name": "NovaDry Connect",
+  "description": "A web application to control and monitor a NovaLabs Freeze Dryer, manage recipes, and log batches of bubble hash processing.",
+  "requestFramePermissions": []
+}
